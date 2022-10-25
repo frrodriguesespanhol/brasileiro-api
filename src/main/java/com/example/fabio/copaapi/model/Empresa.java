@@ -8,31 +8,35 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "selecoes")
-public class Selecao {
+@Table(name = "empresas")
+public class Empresa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "sel_id")
+	@Column(name = "emp_id")
 	private Long id;
-	@Column(name = "sel_nome")
+	@Column(name = "emp_nome")
 	private String nome;
+	@Column(name = "emp_cidade")
+	private String cidade;
 	
 
-	public Selecao() {
+	public Empresa() {
 		super();
 	}
 
-	public Selecao(Long id, String nome) {
+	public Empresa(Long id, String nome, String cidade) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.cidade = cidade;
 		
 	}
 
-	public Selecao(String nome) {
+	public Empresa(String nome, String cidade) {
 		super();
 		this.nome = nome;
+		this.cidade = cidade;
 		
 	}
 	
@@ -51,11 +55,18 @@ public class Selecao {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
 	
 	@Override
 	public String toString() {
-		return "Selecao [id=" + id + ", nome=" + nome + "]";
+		return "Empresa [id=" + id + ", nome=" + nome + ", cidade=" + cidade + "]";
 	}
 
 }

@@ -8,29 +8,29 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "selecoes")
-public class Selecao {
+@Table(name = "fases")
+public class Fase {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "sel_id")
+	@Column(name = "fas_id")
 	private Long id;
-	@Column(name = "sel_nome")
+	@Column(name = "fas_nome")
 	private String nome;
 	
 
-	public Selecao() {
+	public Fase() {
 		super();
 	}
 
-	public Selecao(Long id, String nome) {
+	public Fase(Long id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		
 	}
 
-	public Selecao(String nome) {
+	public Fase(String nome) {
 		super();
 		this.nome = nome;
 		
@@ -55,7 +55,7 @@ public class Selecao {
 	
 	@Override
 	public String toString() {
-		return "Selecao [id=" + id + ", nome=" + nome + "]";
+		return "Fase [id=" + id + ", nome=" + nome + "]";
 	}
 
 }

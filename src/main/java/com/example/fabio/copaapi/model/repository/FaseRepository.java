@@ -6,13 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.example.fabio.copaapi.model.Cidade;
+import com.example.fabio.copaapi.model.Copa;
+import com.example.fabio.copaapi.model.Fase;
+import com.example.fabio.copaapi.model.Selecao;
 
-public interface CidadeRepository extends JpaRepository<Cidade, Long> {
-		
-	@Query(" select c from Cidade c where upper(c.nome) like upper(:nome) and cast( c.idCopa.id as string) like :idCopa ")
-	Page<Cidade> buscarPorNomeCopa(
+public interface FaseRepository extends JpaRepository<Fase, Long> {
+	
+	@Query(" select f from Fase f where upper(f.nome) like upper(:nome) ")
+	Page<Fase> buscarPorNome(
 			@Param("nome") String nome,
-			@Param("idCopa") String idCopa,
 			Pageable pageable);
 }
