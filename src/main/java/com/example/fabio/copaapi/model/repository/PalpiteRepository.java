@@ -22,7 +22,7 @@ public interface PalpiteRepository extends JpaRepository<Palpite, Long> {
 			Pageable pageable);
 	
 	
-	@Query(value = " SELECT nome, pontuacao, cravadas "
+	@Query(value = " SELECT seq, nome, pontuacao, cravadas "
 			+ "FROM view_ranking "
 			+ " order by pontuacao desc, cravadas desc, nome asc"
 			, nativeQuery = true)
