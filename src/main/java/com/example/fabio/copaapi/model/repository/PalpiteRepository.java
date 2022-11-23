@@ -38,7 +38,7 @@ public interface PalpiteRepository extends JpaRepository<Palpite, Long> {
 			@Param("usuario") String usuario,
 			Pageable pageable);
 	
-	@Query(value = " SELECT seq, nome, pontuacao, cravadas "
+	@Query(value = " SELECT seq, nome, pontuacao, cravadas, colocacao "
 			+ "FROM view_ranking "
 			+ " order by pontuacao desc, cravadas desc, nome asc"
 			, nativeQuery = true)
