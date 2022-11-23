@@ -7,4 +7,5 @@ public interface Ranking {
 	String getNome();
 	BigInteger getPontuacao();
 	BigInteger getCravadas();
+	BigInteger getColocacao();
 }
