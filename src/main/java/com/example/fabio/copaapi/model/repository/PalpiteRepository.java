@@ -29,7 +29,8 @@ public interface PalpiteRepository extends JpaRepository<Palpite, Long> {
 			+ " where"
 			+ " hora_jogo >= cast(:data as timestamp without time zone) and"
 			+ " jog_id > cast(:id as integer) and"
-			+ " usu_id = cast(:usuario as integer)", nativeQuery = true)
+			+ " usu_id = cast(:usuario as integer)"
+			+ " order by hora_jogo, jog_id", nativeQuery = true)
 	Page<Palpite> buscarProximoPalpite(
 			@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 			@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
