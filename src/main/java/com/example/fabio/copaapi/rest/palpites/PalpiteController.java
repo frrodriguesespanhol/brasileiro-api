@@ -124,9 +124,17 @@ public class PalpiteController {
 	public Page<Ranking> getLista(Pageable pageable){ 
 		return repository
 					.buscarRanking(pageable);
-					
-					
-					
+	}
+	
+	@GetMapping("/proximo")
+	public Page<PalpiteFormRequest> getLista2(
+			@RequestParam(value="data", required= false) String data,
+			@RequestParam(value="usuario", required= false) String usuario,
+			@RequestParam(value="id", required= false) String id,
+			Pageable pageable){ 
+		return repository
+					.buscarProximoPalpite(data, usuario, id, pageable)
+					.map( PalpiteFormRequest::fromModel );
 					
 	}
 		

@@ -25,17 +25,17 @@ public interface PalpiteRepository extends JpaRepository<Palpite, Long> {
 			@Param("usuario") String usuario,
 			Pageable pageable);
 
-	@Query(value = " select * from palpites"
-			+ " left join jogos on jogos.jog_id = palpites.jog_id "
+	@Query(value = " select * from view_proximo_palpite"
 			+ " where"
-			+ " jogos.data_hora > :data and"
-			+ " cast(p.usuario.id as string) = :usuario"
-			+ " order by p.jogo.data_hora asc limit 1" , nativeQuery = true)
+			+ " hora_jogo >= cast(:data as timestamp without time zone) and"
+			+ " pal_id > cast(:id as integer) and"
+			+ " usu_id = cast(:usuario as integer)", nativeQuery = true)
 	Page<Palpite> buscarProximoPalpite(
 			@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 			@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-			@Param("data") Date data,
+			@Param("data") String data,
 			@Param("usuario") String usuario,
+			@Param("id") String id,
 			Pageable pageable);
 	
 	@Query(value = " SELECT seq, nome, pontuacao, cravadas, colocacao "
