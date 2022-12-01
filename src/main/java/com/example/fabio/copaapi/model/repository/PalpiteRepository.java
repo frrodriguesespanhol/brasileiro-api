@@ -19,7 +19,7 @@ public interface PalpiteRepository extends JpaRepository<Palpite, Long> {
 	@Query(" select p from Palpite p where"
 			+ " (:data='' or substring(cast(p.jogo.data_hora as string), 1, 10) = :data) and"
 			+ " (:usuario='' or cast(p.usuario.id as string) = :usuario)"
-			+ " order by p.jogo.data_hora asc, p.usuario.nome asc")
+			+ " order by p.jogo.data_hora asc, p.jogo.id, p.usuario.nome asc")
 	Page<Palpite> buscarPorDataUsuario(
 			@Param("data") String data,
 			@Param("usuario") String usuario,
