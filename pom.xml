@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example.fabio</groupId>
-	<artifactId>copa-api</artifactId>
+	<artifactId>brasileiro-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>copa-api</name>
-	<description>Copa do Mundo</description>
+	<name>brasileiro-api</name>
+	<description>Brasileirão 2023</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
