@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -Dspring.profiles.active=prod -jar target/copa-api.jar
+web: java -Dserver.port=$PORT -Dspring.profiles.active=prod -jar target/brasileiro-api.jar

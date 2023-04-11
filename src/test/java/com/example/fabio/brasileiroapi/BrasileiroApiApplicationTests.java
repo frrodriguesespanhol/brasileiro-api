@@ -1,10 +1,10 @@
-package com.example.fabio.copaapi;
+package com.example.fabio.brasileiroapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CopaApiApplicationTests {
+class BrasileiroApiApplicationTests {
 
 	@Test
 	void contextLoads() {
