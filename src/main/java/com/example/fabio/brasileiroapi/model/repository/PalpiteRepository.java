@@ -45,7 +45,7 @@ public interface PalpiteRepository extends JpaRepository<Palpite, Long> {
 			, nativeQuery = true)
 	Page<Ranking> buscarRanking(Pageable pageable);
 	
-	@Query(value = " SELECT now()- interval '1 hour'", nativeQuery = true)
+	@Query(value = " SELECT now()- interval '3 hour'", nativeQuery = true)
 	Date buscarHoraAtual();
 	
 }
