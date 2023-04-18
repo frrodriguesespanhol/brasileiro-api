@@ -63,7 +63,8 @@ public class PalpiteController {
 		Palpite palpite = request.toModel();
 		palpite.setId(id);
 
-		Date data = new Date();
+		//Date data = new Date();
+		Date data = repository.buscarHoraAtual();
 		if(palpite.getJogo().getData_hora().before(data)) {
 			System.out.println(palpite.getJogo().getData_hora().before(data));
 			return ResponseEntity.ok().body("erro_data");
