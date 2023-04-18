@@ -65,6 +65,8 @@ public class PalpiteController {
 
 		//Date data = new Date();
 		Date data = repository.buscarHoraAtual();
+		System.out.println("Data do Banco: ");
+		System.out.println(data);
 		if(palpite.getJogo().getData_hora().before(data)) {
 			System.out.println(palpite.getJogo().getData_hora().before(data));
 			return ResponseEntity.ok().body("erro_data");
