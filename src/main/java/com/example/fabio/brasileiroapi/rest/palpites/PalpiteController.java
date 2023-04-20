@@ -96,17 +96,30 @@ public class PalpiteController {
 				.orElseGet( () -> ResponseEntity.notFound().build()  );			
 	}
 
+	/*
+	 * @GetMapping public Page<PalpiteFormRequest> getLista(
+	 * 
+	 * @RequestParam(value="data", required= false) String data,
+	 * 
+	 * @RequestParam(value="usuario", required= false) String usuario, Pageable
+	 * pageable) { //System.out.println(data + " - " + usuario); return repository
+	 * .buscarPorDataUsuario(data , usuario, pageable) .map(
+	 * PalpiteFormRequest::fromModel ); }
+	 */
+	
 	@GetMapping
-	public Page<PalpiteFormRequest> getLista(
+	public Page<PalpiteFormRequest> getLista4(
 		@RequestParam(value="data", required= false) String data,
 		@RequestParam(value="usuario", required= false) String usuario,
+		@RequestParam(value="logado", required= false) String logado,
 		Pageable pageable)
 	{
-		//System.out.println(data + " - " + usuario);
+		System.out.println(data + " - " + usuario + " - " + logado);
 		return repository
-					.buscarPorDataUsuario(data , usuario, pageable)
+					.buscarPorDataUsuario2(data , usuario, logado, pageable)
 					.map( PalpiteFormRequest::fromModel );
 	}
+	
 	
 	@GetMapping("/ranking")
 	public Page<Ranking> getLista(Pageable pageable){ 
@@ -124,6 +137,12 @@ public class PalpiteController {
 					.buscarProximoPalpite(data, usuario, id, pageable)
 					.map( PalpiteFormRequest::fromModel );
 					
+	}
+	
+	@GetMapping("/hora")
+	public Date getHoraAtual(){ 
+		return repository
+					.buscarHoraAtual();
 	}
 		
 }

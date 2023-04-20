@@ -15,7 +15,23 @@ import com.example.fabio.brasileiroapi.model.Ranking;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public interface PalpiteRepository extends JpaRepository<Palpite, Long> {
-		
+
+	@Query(value = " select pal_id, p.jog_id, p.usu_id, pal_data_hora, "
+			+ " case when :logado <> u.usu_email and now() - interval '3 hour' < j.jog_data_hora and p.pal_data_hora is not null then -99 else pal_gols_equ1 end as pal_gols_equ1, "
+			+ " case when :logado <> u.usu_email and now() - interval '3 hour' < j.jog_data_hora and p.pal_data_hora is not null then -99 else pal_gols_equ2 end as pal_gols_equ2, "
+			+ " j.jog_data_hora from palpites p "
+			+ " left join jogos j on j.jog_id = p.jog_id "
+			+ " left join usuarios u on p.usu_id = u.usu_id "
+			+ " where "
+			+ " (:data='' or substring(cast(j.jog_data_hora as character varying), 1, 10) = :data) and "
+			+ " (:usuario='' or cast(p.usu_id as character varying) = :usuario) "
+			+ " order by j.jog_data_hora asc, j.jog_id, u.usu_nome asc ", nativeQuery = true)
+	Page<Palpite> buscarPorDataUsuario2(
+			@Param("data") String data,
+			@Param("usuario") String usuario,
+			@Param("logado") String logado,
+			Pageable pageable);
+	
 	@Query(" select p from Palpite p where"
 			+ " (:data='' or substring(cast(p.jogo.data_hora as string), 1, 10) = :data) and"
 			+ " (:usuario='' or cast(p.usuario.id as string) = :usuario)"
