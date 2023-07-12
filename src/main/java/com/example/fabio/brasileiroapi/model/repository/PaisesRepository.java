@@ -6,13 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.example.fabio.brasileiroapi.model.Cidade;
+import com.example.fabio.brasileiroapi.model.Paises;
 
-public interface CidadeRepository extends JpaRepository<com.example.fabio.brasileiroapi.model.Cidade, Long> {
-		
-	@Query(" select c from Cidade c where upper(c.nome) like upper(:nome) and cast( c.idPais.id as string) like :idPais ")
-	Page<Cidade> buscarPorNomeCidade(
+public interface PaisesRepository extends JpaRepository<Paises, Long> {
+	
+	@Query(" select s from Paises s where upper(s.nome) like upper(:nome) ")
+	Page<Paises> buscarPorNome(
 			@Param("nome") String nome,
-			@Param("idPais") String idPais,
 			Pageable pageable);
 }

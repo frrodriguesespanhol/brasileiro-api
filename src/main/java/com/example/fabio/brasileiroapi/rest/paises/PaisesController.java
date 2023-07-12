@@ -1,4 +1,4 @@
-package com.example.fabio.brasileiroapi.rest.cidades;
+package com.example.fabio.brasileiroapi.rest.paises;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,49 +19,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.fabio.brasileiroapi.model.Cidade;
 import com.example.fabio.brasileiroapi.model.Paises;
-import com.example.fabio.brasileiroapi.model.repository.CidadeRepository;
+import com.example.fabio.brasileiroapi.model.repository.PaisesRepository;
 
 @RestController
-@RequestMapping("/api/cidades")
+@RequestMapping("/api/paises")
 @CrossOrigin("*")
-public class CidadeController {
+public class PaisesController {
 
 	@Autowired
-	private CidadeRepository repository;
+	private PaisesRepository repository;
 
 	@PostMapping
-	public ResponseEntity salvar(@RequestBody CidadeFormRequest request) {
-	//public void salvar(@RequestBody Cidade cidade) {
-		Cidade cidade = request.toModel();
-		//System.out.println(cidade);
-		repository.save(cidade);
-		return ResponseEntity.ok(CidadeFormRequest.fromModel(cidade));
-		
+	public ResponseEntity salvar(@RequestBody PaisesFormRequest request) {
+		Paises paises = request.toModel();
+		repository.save(paises);
+		return ResponseEntity.ok(PaisesFormRequest.fromModel(paises));
 	}
 
 	@PutMapping("{id}")
 	public ResponseEntity<Void> atualizar(
 			@PathVariable Long id,
-			@RequestBody CidadeFormRequest request) {
+			@RequestBody PaisesFormRequest request) {
 
-		Optional<Cidade> cidadeExistente = repository.findById(id);
-		if(cidadeExistente.isEmpty()) {
+		Optional<Paises> paisExistente = repository.findById(id);
+		if(paisExistente.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
 
-		Cidade cidade = request.toModel();
-		cidade.setId(id);
-		repository.save(cidade);
+		Paises paises = request.toModel();
+		paises.setId(id);
+		repository.save(paises);
 		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<CidadeFormRequest> getById(@PathVariable Long id){
+	public ResponseEntity<PaisesFormRequest> getById(@PathVariable Long id){
 		return repository.findById(id)
-				.map( CidadeFormRequest::fromModel )
-				.map( cidadeFR -> ResponseEntity.ok(cidadeFR) )
+				.map( PaisesFormRequest::fromModel )
+				.map( paisesFR -> ResponseEntity.ok(paisesFR) )
 				.orElseGet( () -> ResponseEntity.notFound().build()  );				
 	}
 
@@ -69,22 +65,20 @@ public class CidadeController {
 	public ResponseEntity<Object> delete(@PathVariable Long id){
 		return repository
 				.findById(id)
-				.map( cidade -> {
-					repository.delete(cidade);
+				.map( paises -> {
+					repository.delete(paises);
 					return ResponseEntity.noContent().build();
 				})
 				.orElseGet( () -> ResponseEntity.notFound().build()  );			
 	}
 
 	@GetMapping
-	public Page<CidadeFormRequest> getLista(
+	public Page<PaisesFormRequest> getLista(
 		@RequestParam(value="nome", required= false, defaultValue = "") String nome,
-		@RequestParam(value="idPais", required= false, defaultValue = "") String idPais,
 		Pageable pageable
-		
-	){ System.out.println(idPais + " - " + nome);
+	){
 		return repository
-					.buscarPorNomeCidade("%" + nome + "%", "%" + idPais + "%", pageable)
-					.map( CidadeFormRequest::fromModel );
+					.buscarPorNome("%" + nome + "%",pageable)
+					.map( PaisesFormRequest::fromModel );
 	}
 }

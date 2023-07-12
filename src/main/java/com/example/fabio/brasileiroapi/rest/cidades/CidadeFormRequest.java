@@ -3,14 +3,14 @@ package com.example.fabio.brasileiroapi.rest.cidades;
 import java.time.LocalDate;
 
 import com.example.fabio.brasileiroapi.model.Cidade;
-import com.example.fabio.brasileiroapi.model.Campeonato;
+import com.example.fabio.brasileiroapi.model.Paises;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class CidadeFormRequest {
 
 	private Long id;
 	private String nome;
-	private Campeonato idCampeonato;
+	private Paises idPais;
 	
 	public CidadeFormRequest() {
 		super();
@@ -19,15 +19,15 @@ public class CidadeFormRequest {
 	/**
 	 * @param cid_id
 	 * @param cid_nome
-	 * @param cam_id
+	 * @param pai_id
 	 */
 	
-	public CidadeFormRequest(Long id, String nome, Campeonato idCampeonato) {
+	public CidadeFormRequest(Long id, String nome, Paises idPais) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.idCampeonato= idCampeonato;
-		//System.out.println(this.idCampeonato);
+		this.idPais= idPais;
+		//System.out.println(this.idPais);
 	}
 
 	public Long getId() {
@@ -42,20 +42,20 @@ public class CidadeFormRequest {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Campeonato getIdCampeonato() {
-		return idCampeonato;
+	public Paises getIdPais() {
+		return idPais;
 	}
-	public void setIdCampeonato(Campeonato idCampeonato) {
-		this.idCampeonato = idCampeonato;
+	public void setIdPais(Paises idPais) {
+		this.idPais = idPais;
 	}
 	
 	public Cidade toModel() {
-		return new Cidade(id, nome, idCampeonato);
+		return new Cidade(id, nome, idPais);
 	}
 	
 	public static CidadeFormRequest fromModel(Cidade cidade) {
 		//System.out.println(cidade);
-		return new CidadeFormRequest(cidade.getId(), cidade.getNome(), cidade.getIdCampeonato());
+		return new CidadeFormRequest(cidade.getId(), cidade.getNome(), cidade.getIdPais());
 	}
 
 }
