@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.example.fabio.brasileiroapi.model.Campeonato;
 import com.example.fabio.brasileiroapi.model.Cidade;
 import com.example.fabio.brasileiroapi.model.Estadio;
 import com.example.fabio.brasileiroapi.model.Fase;
@@ -24,13 +25,14 @@ public class JogoFormRequest {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data_hora;
 	private Fase fase;
+	private Campeonato campeonato;
 		
 	public JogoFormRequest() {
 		super();
 	}
 	
 	public JogoFormRequest(Long id, Equipe equ1, Equipe equ2, Long gols1, Long gols2,
-			Estadio estadio, Date data_hora, Fase fase) {
+			Estadio estadio, Date data_hora, Fase fase, Campeonato campeonato) {
 		super();
 		this.id = id;
 		this.equ1 = equ1;
@@ -40,6 +42,7 @@ public class JogoFormRequest {
 		this.estadio = estadio;
 		this.data_hora = data_hora;
 		this.fase = fase;
+		this.campeonato = campeonato;
 		//System.out.println(this.equ1);
 	}
 	
@@ -107,15 +110,23 @@ public class JogoFormRequest {
 		this.fase = fase;
 	}
 	
+	public Campeonato getCampeonato() {
+		return campeonato;
+	}
+
+	public void setCAmpeonato(Campeonato campeonato) {
+		this.campeonato = campeonato;
+	}
+	
 	public Jogo toModel() {
-		return new Jogo(id, equ1, equ2, gols1, gols2, estadio, data_hora, fase);
+		return new Jogo(id, equ1, equ2, gols1, gols2, estadio, data_hora, fase, campeonato);
 	}
 	
 	public static JogoFormRequest fromModel(Jogo jogo) {
 		//System.out.println(jogo);
 		return new JogoFormRequest(jogo.getId(), jogo.getEqu1(), jogo.getEqu2(),
 				jogo.getGols1(), jogo.getGols2(), jogo.getEstadio(), jogo.getData_hora(),
-				jogo.getFase());
+				jogo.getFase(), jogo.getCampeonato());
 	}
 
 }

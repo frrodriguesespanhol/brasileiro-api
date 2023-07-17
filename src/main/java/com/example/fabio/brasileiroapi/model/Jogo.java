@@ -49,13 +49,17 @@ public class Jogo {
 	@ManyToOne
 	@JoinColumn(name = "fas_id")
 	private Fase fase;
+	
+	@ManyToOne
+	@JoinColumn(name = "cam_id")
+	private Campeonato campeonato;
 
 	public Jogo() {
 		super();
 	}
 
 	public Jogo(Long id, Equipe equ1, Equipe equ2, Long gols1, Long gols2, Estadio estadio,
-				Date data_hora, Fase fase) {
+				Date data_hora, Fase fase, Campeonato campeonato) {
 		
 		super();
 		System.out.println("equ1 ------>>> " + equ1);
@@ -67,12 +71,13 @@ public class Jogo {
 		this.estadio = estadio;
 		this.data_hora = data_hora;
 		this.fase = fase;
+		this.campeonato = campeonato;
 		System.out.println(id + " " + equ1 + " " + equ2 + " " + gols1 + " " + gols2
-				+ " " + estadio + " " + data_hora + " " + fase);
+				+ " " + estadio + " " + data_hora + " " + fase + " " + campeonato);
 	}
 	
 	public Jogo(Equipe equ1, Equipe equ2, Long gols1, Long gols2, Estadio estadio,
-			Date data_hora, Fase fase) {
+			Date data_hora, Fase fase, Campeonato campeonato) {
 		super();
 		this.equ1 = equ1;
 		this.equ2 = equ2;
@@ -81,6 +86,7 @@ public class Jogo {
 		this.estadio = estadio;
 		this.data_hora = data_hora;
 		this.fase = fase;
+		this.campeonato = campeonato;
 	}
 
 	public Long getId() {
@@ -147,10 +153,18 @@ public class Jogo {
 		this.fase = fase;
 	}
 
+	public Campeonato getCampeonato() {
+		return campeonato;
+	}
+
+	public void setCampeonato(Campeonato campeonato) {
+		this.campeonato = campeonato;
+	}
+	
 	@Override
 	public String toString() {
 		return "Jogo [id=" + id + ", equ1=" + equ1 + ", equ2=" + equ2 + ", gols1=" + gols1 + ", gols2=" + gols2
-				+ ", estadio=" + estadio + ", data_hora=" + data_hora + ", fase=" + fase + "]";
+				+ ", estadio=" + estadio + ", data_hora=" + data_hora + ", fase=" + fase + ", campeonato=" + campeonato + "]";
 	}
 	
 
