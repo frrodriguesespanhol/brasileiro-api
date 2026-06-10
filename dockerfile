@@ -1,15 +1,18 @@
-FROM ubuntu:latest AS build
+FROM maven:3.9-eclipse-temurin-11 AS build
 
-RUN apt-get update
-RUN apt-get install openjdk-11-jdk -y
-COPY . .
+WORKDIR /app
 
-RUN apt-get install maven -y
-RUN mvn clean install
+COPY pom.xml .
+COPY src ./src
 
-FROM eclipse-temurin:11-jdk
+RUN mvn clean package -DskipTests
+
+FROM eclipse-temurin:11-jre
+
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar app.jar
+
 EXPOSE 8080
 
-COPY --from=build /target/brasileiro-app.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
