@@ -17,8 +17,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public interface PalpiteRepository extends JpaRepository<Palpite, Long> {
 
 	@Query(value = " select pal_id, p.jog_id, p.usu_id, pal_data_hora, "
-			+ " case when :logado <> u.usu_email and now() - interval '3 hour' < j.jog_data_hora and p.pal_data_hora is not null then -99 else pal_gols_equ1 end as pal_gols_equ1, "
-			+ " case when :logado <> u.usu_email and now() - interval '3 hour' < j.jog_data_hora and p.pal_data_hora is not null then -99 else pal_gols_equ2 end as pal_gols_equ2, "
+			//+ " case when :logado <> u.usu_email and now() - interval '3 hour' < j.jog_data_hora and p.pal_data_hora is not null then -99 else pal_gols_equ1 end as pal_gols_equ1, "
+			//+ " case when :logado <> u.usu_email and now() - interval '3 hour' < j.jog_data_hora and p.pal_data_hora is not null then -99 else pal_gols_equ2 end as pal_gols_equ2, "
+			+ " case when :logado <> u.usu_email and now() < j.jog_data_hora and p.pal_data_hora is not null then -99 else pal_gols_equ1 end as pal_gols_equ1, "
+			+ " case when :logado <> u.usu_email and now() < j.jog_data_hora and p.pal_data_hora is not null then -99 else pal_gols_equ2 end as pal_gols_equ2, "
 			+ " j.jog_data_hora from palpites p "
 			+ " left join jogos j on j.jog_id = p.jog_id "
 			+ " left join usuarios u on p.usu_id = u.usu_id "
